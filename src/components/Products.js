@@ -1,58 +1,52 @@
-import {React,Component} from "react";
+import { getProduct } from '../services/fetch';
+import React, { useState } from 'react';
+import {
+    BrowserRouter,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
-class Products extends Component{
-    constructor() {
-        super();
-        this.state={
-            products:[
-                {id:1,name:"seiko",description:"diverek"},
-                {id:2,name:"invicta",description:"diverek2"},
-            ],
-        }
-    }
+function Products(props) {
+    let [responseData, setResponseData] = React.useState([
+        {id:1,name:"seiko",description:"diverek"},
+        {id:2,name:"invicta",description:"diverek2"}
+    ]);
+    let { addToBasket } = props;
 
-    async getProductsRequest(url){
-        let result = null;
-        result = fetch(url,{
-            mode: 'cors',
-            headers:{
-                'Accept':'application/json',
-                'Content-type': 'application/json',
-                'Access-Control-Allow-Origin':'http://localhost:9000',
-            },
-            method:'GET',
-        }).then(response=>{return response.json}).then(responseData=>{
-            return responseData;
-        })
-        return result;
-    }
-
-    async getProducts(){
-        const url = "http://localhost:9000/products";
-        let response = await this.getProductsRequest(url)
-        let products = [];
-            response.map(prod => {
-                let product = {
-                    id: prod.id,
-                    title: prod.description,
-                    category:prod.category,
-                };
-                products.push(product);
+    React.useEffect(() => {
+        getProduct()
+            .then((json) => {
+                setResponseData(json)
             })
-        this.setState({products:products})
-    }
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [setResponseData, responseData])
 
-    componentDidMount() {
-        //this.getProducts(); POTEM ODKOMENTOWAĆ
-    }
+    return (
+        <div className="Product">
+      <pre>
+        <code>
+          <h2>Products</h2>
+        </code>
+        <div>
+          {responseData && responseData.map(obj => (
+              <div className="product-card">
+                  {obj.name}
+                  <div className="buttons-product">
+                      <div className="product-info-button">
+                          <Link to={'/product/' + obj.id} >Opis..</Link>
+                      </div>
+                      <button onClick={() => addToBasket(obj)} className="add-to-cart-button">Add To Cart</button>
+                  </div>
 
-    render(){
-        return (
-
-            <ul>{this.state.products.map(product => <li key={product}>{product.name}</li>)}</ul>
-            
-        )
-    }
-
+              </div>
+          ))}
+        </div>
+      </pre>
+        </div >
+    );
 }
+
 export default Products;

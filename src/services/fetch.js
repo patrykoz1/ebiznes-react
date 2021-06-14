@@ -2,6 +2,15 @@
 export function getProducts() {
     const route = "productJSON";
     return fetchData(route);
+
+    const host = "http://localhost:9000/"
+    //const route=""
+
+    return fetch(host + route).then((response) => response.json())
+}
+
+export function buyProducts(){
+
 }
 
 export function getProduct(id) {

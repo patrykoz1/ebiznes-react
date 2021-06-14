@@ -19,6 +19,7 @@ import Register from "./components/Register";
 
 import {MyContext} from "./contexts/AppContext";
 import React, { useState, useContext } from 'react';
+import Basket from "./components/Basket";
 
 console.log("KONTEKST");
 console.log(MyContext);
@@ -27,7 +28,19 @@ console.log(MyContext);
 function App() {
     const [state, setState] = useContext(MyContext);
     //console.log("KONTEKST"+MyContext);
+    const [basket, setBasket] = useState([]);
 
+    const addToBasket = (prod) => {
+        console.log(prod);
+        setBasket([...basket, prod]);
+    };
+
+    const removeFromBasket = (prod) => {
+        let hardCopy = [...basket];
+        hardCopy = hardCopy.filter((cartItem) => cartItem.id !== basket.id);
+        setBasket(hardCopy);
+    };
+    console.log(basket);
     return (
         <BrowserRouter >
     <div className="App">
@@ -38,19 +51,19 @@ function App() {
               <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav">
                       <li className="nav-item">
-                          <a className="nav-link" href="/">Home <span className="sr-only"></span></a>
+                          <Link className="nav-link" to="/">Home <span className="sr-only"></span></Link>
                       </li>
                       <li className="nav-item">
-                          <a className="nav-link" href="/products">Produkty <span className="sr-only"></span></a>
+                          <Link className="nav-link" to="/products">Produkty <span className="sr-only"></span></Link>
                       </li>
                       {!state.isLogged &&
                       <li className="nav-item">
-                          <a className="nav-link" href="/register">Rejestruj sie <span className="sr-only"></span></a>
+                          <Link className="nav-link" to="/register">Rejestruj sie <span className="sr-only"></span></Link>
                       </li>
                       }
                       {!state.isLogged &&
                       <li className="nav-item">
-                          <a className="nav-link" href="/login">Loguj sie <span className="sr-only"></span></a>
+                          <Link className="nav-link" to="/login">Loguj sie <span className="sr-only"></span></Link>
                       </li>
                       }
                       {state.isLogged &&
@@ -61,12 +74,22 @@ function App() {
               </div>
           </nav>
 
-        <Route path="/" component={Welcome}/>
-        <Route path="/products" component={Products}/>
+        <Route path="/"><Welcome /></Route>
+        <Route path="/products"><Products addToBasket={addToBasket} /></Route>
         <Route path="/register" component={Register}/>
         <Route path="/login" component={Login}/>
 
+        {!state.isLogged &&
+
+        <div className="Basket">
+            <Basket basket={basket} addToBasket={addToBasket}></Basket>
+        </div>
+        }
+
+
   </div>
+
+
         </BrowserRouter >
   );
 }
