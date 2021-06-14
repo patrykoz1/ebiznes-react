@@ -1,9 +1,9 @@
 import {React,Component} from "react";
-import Products from "./Products";
+import Products from "./components/Products";
 
 class Welcome extends Component{
     render(){
-        return "Moj nowy sklep"
+        return "";
     }
 
 }
