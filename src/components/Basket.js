@@ -1,7 +1,17 @@
-import buy from './services/fetch'
+import {buyProducts} from '../services/fetch'
+import {Link} from "react-router-dom";
+import React, {useContext} from "react";
+import {MyContext} from "../contexts/AppContext";
 function Basket(props) {
     const { basket, addToBasket } = props;
+    const [state, setState] = useContext(MyContext);
 
+    const result = basket.map(prod => prod.id);//array with ids
+    const res_len= result.length;
+    function buy(){
+        //buyProducts(result);
+        console.log(result);
+    }
     return (
         <div>
         <div className="shopping-cart">
@@ -15,6 +25,13 @@ function Basket(props) {
                         </div>
                     ))}
                 </ul>
+
+
+                    <div className="buttons-product">
+                    <button onClick={() => buy()} className="add-to-cart-button">Kup</button>
+                    </div>
+
+
             </pre>
         </div>
         </div>

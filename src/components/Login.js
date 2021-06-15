@@ -42,7 +42,7 @@ export default function Login() {
                     else {
                         setRedirect(true);
                         localStorage.setItem('email', email);
-                        setState({ email: email, isLoggedIn: true });
+                        setState({ email: email, isLogged: true });
                     }
                     console.log("from server login ", response);
                 })

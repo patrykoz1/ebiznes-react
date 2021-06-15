@@ -1,6 +1,6 @@
 
 export function getProducts() {
-    const route = "productJSON";
+    const route = "products";
     return fetchData(route);
 
     const host = "http://localhost:9000/"
@@ -9,7 +9,7 @@ export function getProducts() {
     return fetch(host + route).then((response) => response.json())
 }
 
-export function buyProducts(){
+export function buyProducts(arr){
 
 }
 
@@ -57,8 +57,9 @@ export function signOut() {
     const route = "signOut";
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': '*'},
         credentials: 'include',
+        mode: 'no-cors',
     };
     return fetch(host + route, requestOptions)
 }
@@ -67,6 +68,18 @@ export function signOut() {
 export function signInGoogle() {
     const host = "http://localhost:9000/"
     const route = "authenticate/google";
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        mode: 'cors',
+    };
+    return fetch(host + route, requestOptions)
+}
+
+export function signInFacebook() {
+    const host = "http://localhost:9000/"
+    const route = "authenticate/facebook";
     const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

@@ -9,18 +9,18 @@ const startState = {
 };
 
 
-export const MyContext = React.createContext([[],() => {}]);
+export const MyContext = React.createContext();
 
 const AppStore = ({ children }) => {
     const [state, setState] = useState(startState);
 
     useEffect(() => {
         const email = localStorage.getItem('email');
-        const logged = Cookies.get("authenticator");
-
+        const logged = Cookies.get('authenticator');
         const checkSession = Cookies.get();
-        console.log(checkSession)
-        console.log(logged)
+        console.log(state);
+        console.log(checkSession);
+        console.log(logged);
         if (logged) {//if  logged
             setState({ email: email, isLogged: true })
         }

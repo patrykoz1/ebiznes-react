@@ -6,12 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter,Link,Route,Router} from 'react-router-dom';
 import Products from "./components/Products";
 import Welcome from "./Welcome";
-import Categories from "./components/Categories";
-import Orders from "./components/Orders";
-import Shippings from "./components/Shippings";
-import Invoices from "./components/Invoices";
-import Purchases from "./components/Purchases";
-import Comments from "./components/Comments";
 import Logout from "./components/Logout";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -21,26 +15,24 @@ import {MyContext} from "./contexts/AppContext";
 import React, { useState, useContext } from 'react';
 import Basket from "./components/Basket";
 
-console.log("KONTEKST");
-console.log(MyContext);
-
 
 function App() {
     const [state, setState] = useContext(MyContext);
-    //console.log("KONTEKST"+MyContext);
+    //console.log("state");
     const [basket, setBasket] = useState([]);
-
+    //console.log(state.isLogged);
     const addToBasket = (prod) => {
-        console.log(prod);
+        //console.log(prod);
         setBasket([...basket, prod]);
     };
+    console.log("Cały basket");
+    console.log(basket);
 
     const removeFromBasket = (prod) => {
         let hardCopy = [...basket];
         hardCopy = hardCopy.filter((cartItem) => cartItem.id !== basket.id);
         setBasket(hardCopy);
     };
-    console.log(basket);
     return (
         <BrowserRouter >
     <div className="App">
@@ -67,7 +59,10 @@ function App() {
                       </li>
                       }
                       {state.isLogged &&
-                      <Logout />
+                      <li className="nav-item">
+
+                      <Link className="nav-link" to="/logout">Wyloguj sie <span className="sr-only"></span></Link>
+                      </li>
                       }
 
                   </ul>
@@ -78,6 +73,7 @@ function App() {
         <Route path="/products"><Products addToBasket={addToBasket} /></Route>
         <Route path="/register" component={Register}/>
         <Route path="/login" component={Login}/>
+        <Route path="/logout" component={Logout}/>
 
         {!state.isLogged &&
 

@@ -15,12 +15,10 @@ import { set } from 'js-cookie';
 function Product(props) {
     const location = useLocation()
     const par_id = props.match.params.id;
-    let [responseData, setResponseData] = React.useState([
-        {id:1,name:"seiko",description:"diverek"},
-        {id:2,name:"invicta",description:"diverek2"}
-    ]);
+    let [responseData, setResponseData] = React.useState(
+        //[{id:1,name:"seiko",description:"diverek"}, {id:2,name:"invicta",description:"diverek2"}]
+    );
     const [state, setState] = useContext(AuthContext);
-    //const [comment, setComment] = useState('');
 
     React.useEffect(() => {
         getSpecificProduct(par_id)
@@ -31,11 +29,7 @@ function Product(props) {
                 console.log(error)
             })
     }, [setResponseData, responseData])
-    /*
-    const postComment = (id) => {
-        addComment(comment, id);
-        console.log(comment, id);
-    }*/
+
 
     return (
         <div className="Product">
@@ -49,8 +43,6 @@ function Product(props) {
               <div className="product-desc">{obj.description}</div>
               <div>category: {obj.category}</div>
             </div>
-            <h3>Comments:</h3>
-              <ItemComments product_id={obj.id} />
           </div>
 
         </pre>
