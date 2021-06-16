@@ -1,16 +1,9 @@
-import { getProduct, getSpecificProduct } from '../services/FetchApi';
+/*import { getProduct, getSpecificProduct } from '../services/FetchApi';
 import React, { useState, useContext } from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
     useLocation
 } from "react-router-dom";
-import ItemComments from './ItemComment';
 import { AuthContext } from '../AuthStore'
-import { addComment } from '../services/FetchApi';
-import { set } from 'js-cookie';
 
 function Product(props) {
     const location = useLocation()
@@ -21,7 +14,7 @@ function Product(props) {
     const [state, setState] = useContext(AuthContext);
 
     React.useEffect(() => {
-        getSpecificProduct(par_id)
+         getSpecificProduct(par_id)
             .then((json) => {
                 setResponseData(json)
             })
@@ -52,3 +45,4 @@ function Product(props) {
 }
 
 export default Product;
+*/

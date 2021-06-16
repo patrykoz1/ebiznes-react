@@ -1,16 +1,21 @@
 import {buyProducts} from '../services/fetch'
 import {Link} from "react-router-dom";
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {MyContext} from "../contexts/AppContext";
-function Basket(props) {
-    const { basket, addToBasket } = props;
-    const [state, setState] = useContext(MyContext);
 
-    const result = basket.map(prod => prod.id);//array with ids
-    const res_len= result.length;
+
+function Basket(props) {
+    const { basket, addToBasket,setBasket } = props;
+    const [state, setState] = useContext(MyContext);
+    console.log("To są propsy: ");
+    console.log(props);
+
     function buy(){
+        const result = basket.map(prod => prod.id);//array with ids
+        window.alert("Świetnie! Twoje produkty zostały zakupione!");
         //buyProducts(result);
-        console.log(result);
+        setBasket([basket,[]]);
+        
     }
     return (
         <div>
@@ -25,13 +30,12 @@ function Basket(props) {
                         </div>
                     ))}
                 </ul>
-
-
-                    <div className="buttons-product">
-                    <button onClick={() => buy()} className="add-to-cart-button">Kup</button>
-                    </div>
-
-
+                {
+                    basket.length > 0 && state.isLogged &&
+                        <div className="buttons-product">
+                            <button onClick={() => buy()} className="add-to-cart-button">Kup</button>
+                        </div>
+                }
             </pre>
         </div>
         </div>

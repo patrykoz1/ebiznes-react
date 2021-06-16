@@ -29,7 +29,7 @@ const AppStore = ({ children }) => {
         }
 
         console.log(email);
-    }, []) // <-- empty dependency array
+    }, []) // <-- pusta tablica
 
     return (
         <MyContext.Provider value={[state, setState]}>{children}</MyContext.Provider>

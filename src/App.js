@@ -24,15 +24,11 @@ function App() {
     const addToBasket = (prod) => {
         //console.log(prod);
         setBasket([...basket, prod]);
+        //setBasket(basket.push(prod))
     };
     console.log("Cały basket");
     console.log(basket);
 
-    const removeFromBasket = (prod) => {
-        let hardCopy = [...basket];
-        hardCopy = hardCopy.filter((cartItem) => cartItem.id !== basket.id);
-        setBasket(hardCopy);
-    };
     return (
         <BrowserRouter >
     <div className="App">
@@ -75,10 +71,10 @@ function App() {
         <Route path="/login" component={Login}/>
         <Route path="/logout" component={Logout}/>
 
-        {!state.isLogged &&
+        {state.isLogged &&
 
         <div className="Basket">
-            <Basket basket={basket} addToBasket={addToBasket}></Basket>
+            <Basket basket={basket} addToBasket={addToBasket} setBasket={setBasket}></Basket>
         </div>
         }
 
