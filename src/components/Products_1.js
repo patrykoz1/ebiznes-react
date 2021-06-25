@@ -4,7 +4,10 @@ class Products extends Component{
     constructor() {
         super();
         this.state={
-            products:[],
+            products:[
+                {id:1,name:"seiko",description:"diverek"},
+                {id:2,name:"invicta",description:"diverek2"},
+            ],
         }
     }
 
@@ -15,7 +18,7 @@ class Products extends Component{
             headers:{
                 'Accept':'application/json',
                 'Content-type': 'application/json',
-                'Access-Control-Allow-Origin':'http://localhost:3000',
+                'Access-Control-Allow-Origin':'http://localhost:9000',
             },
             method:'GET',
         }).then(response=>{return response.json}).then(responseData=>{
@@ -25,7 +28,7 @@ class Products extends Component{
     }
 
     async getProducts(){
-        const url = "http://localhost:9000/";
+        const url = "http://localhost:9000/products";
         let response = await this.getProductsRequest(url)
         let products = [];
             response.map(prod => {
@@ -40,11 +43,15 @@ class Products extends Component{
     }
 
     componentDidMount() {
-        this.getProducts();
+        //this.getProducts(); POTEM ODKOMENTOWAĆ
     }
 
     render(){
-        return "Products"
+        return (
+
+            <ul>{this.state.products.map(product => <li key={product}>{product.name}</li>)}</ul>
+
+        )
     }
 
 }

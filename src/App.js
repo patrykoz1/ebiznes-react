@@ -1,49 +1,88 @@
 // @ts-ignore
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter,Link,Route} from 'react-router-dom';
-import Products from "./Products";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import {BrowserRouter,Link,Route,Router} from 'react-router-dom';
+import Products from "./components/Products";
 import Welcome from "./Welcome";
-import Categories from "./Categories";
-import Orders from "./Orders";
-import Shippings from "./Shippings";
-import Invoices from "./Invoices";
-import Purchases from "./Purchases";
-import Comments from "./Comments";
+import Logout from "./components/Logout";
+import Login from "./components/Login";
+import Register from "./components/Register";
+
+
+import {MyContext} from "./contexts/AppContext";
+import React, { useState, useContext } from 'react';
+import Basket from "./components/Basket";
+
 
 function App() {
-  return (
+    const [state, setState] = useContext(MyContext);
+    //console.log("state");
+    const [basket, setBasket] = useState([]);
+    //console.log(state.isLogged);
+    const addToBasket = (prod) => {
+        //console.log(prod);
+        setBasket([...basket, prod]);
+        //setBasket(basket.push(prod))
+    };
+    console.log("Cały basket");
+    console.log(basket);
+
+    return (
+        <BrowserRouter >
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-    <div>
-      <BrowserRouter>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/products">Products</Link></li>
-        <li><Link to="/categories">Categories</Link></li>
-        <li><Link to="/orders">Orders</Link></li>
-        <li><Link to="/shippings">Shippings</Link></li>
-        <li><Link to="/purchases">Purchases</Link></li>
-        <li><Link to="/invoices">Invoices</Link></li>
-        <li><Link to="/comments">Comments</Link></li>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-      </ul>
-        <Route path="/" component={Welcome}/>
-        <Route path="/products" component={Products}/>
-        <Route path="/categories" component={Categories}/>
-        <Route path="/orders" component={Orders}/>
-        <Route path="/shippings" component={Shippings}/>
-        <Route path="/purchases" component={Purchases}/>
-        <Route path="/invoices" component={Invoices}/>
-        <Route path="/comments" component={Comments}/>
+      </nav>
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+              <div className="collapse navbar-collapse" id="navbarNav">
+                  <ul className="navbar-nav">
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/">Home <span className="sr-only"></span></Link>
+                      </li>
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/products">Produkty <span className="sr-only"></span></Link>
+                      </li>
+                      {!state.isLogged &&
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/register">Rejestruj sie <span className="sr-only"></span></Link>
+                      </li>
+                      }
+                      {!state.isLogged &&
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/login">Loguj sie <span className="sr-only"></span></Link>
+                      </li>
+                      }
+                      {state.isLogged &&
+                      <li className="nav-item">
+
+                      <Link className="nav-link" to="/logout">Wyloguj sie <span className="sr-only"></span></Link>
+                      </li>
+                      }
+
+                  </ul>
+              </div>
+          </nav>
+
+        <Route path="/"><Welcome /></Route>
+        <Route path="/products"><Products addToBasket={addToBasket} /></Route>
+        <Route path="/register" component={Register}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/logout" component={Logout}/>
+
+        {state.isLogged &&
+
+        <div className="Basket">
+            <Basket basket={basket} addToBasket={addToBasket} setBasket={setBasket}></Basket>
+        </div>
+        }
 
 
-
-      </BrowserRouter>
   </div>
-    </div>
+
+
+        </BrowserRouter >
   );
 }
 
