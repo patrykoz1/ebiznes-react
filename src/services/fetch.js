@@ -3,7 +3,7 @@ export function getProducts() {
     const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        mode: 'cors',
+        mode: 'no-cors',
     };
     return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
 }
