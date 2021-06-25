@@ -21,12 +21,10 @@ jobs:
       with:
         node-version: '14.x'
 
-    - name: npm install, build
+    - name: npm install, build, and test
       run: |
-        npm install
-        npm run build --if-present
-      env:
-         CI: false
+        CI=false npm install
+        CI=false npm run build --if-present
 
     
     - name: 'Deploy to Azure Web App'
