@@ -1,6 +1,6 @@
 
 export function getProducts() {
-    return fetch("http://localhost:9000/products").then((response) => response.json())
+    return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
 }
 
 export function buyProducts(arr){
@@ -8,7 +8,7 @@ export function buyProducts(arr){
     const requestOptions = {
         method: 'DELETE',};
     for(var i=0;i<arr.length;++i){
-        const route="http://localhost:9000/product/delete/"+arr[i];
+        const route="https://uj-ebiznes-back.azurewebsites.net/product/delete/"+arr[i];
         fetch(route,requestOptions).then((response) => response.json());
     }
     //return fetch("http://localhost:9000/product").then((response) => response.json())
@@ -31,7 +31,7 @@ export function getUser() {
 
 
 export function signUp(email, password) {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "signUp";
     const requestOptions = {
         method: 'POST',
@@ -42,7 +42,7 @@ export function signUp(email, password) {
 }
 
 export function signIn(email, password) {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "signIn";
     const requestOptions = {
         method: 'POST',
@@ -54,7 +54,7 @@ export function signIn(email, password) {
 }
 
 export function signOut() {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "signOut";
     const requestOptions = {
         method: 'POST',
@@ -67,7 +67,7 @@ export function signOut() {
 
 //G_AUTHUSER_H
 export function signInGoogle() {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "authenticate/google";
     const requestOptions = {
         method: 'GET',
@@ -79,7 +79,7 @@ export function signInGoogle() {
 }
 
 export function signInFacebook() {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "authenticate/facebook";
     const requestOptions = {
         method: 'GET',
@@ -91,7 +91,7 @@ export function signInFacebook() {
 }
 
 function fetchData(route) {
-    const host = "http://localhost:9000/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
 
     return fetch(host + route).then((response) => response.json())
 }
