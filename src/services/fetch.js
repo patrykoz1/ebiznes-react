@@ -1,12 +1,19 @@
 
 export function getProducts() {
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+    };
     return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
 }
 
 export function buyProducts(arr){
 
     const requestOptions = {
-        method: 'DELETE',};
+        method: 'DELETE',
+        mode: 'cors',
+    };
     for(var i=0;i<arr.length;++i){
         const route="https://uj-ebiznes-back.azurewebsites.net/product/delete/"+arr[i];
         fetch(route,requestOptions).then((response) => response.json());
@@ -36,7 +43,9 @@ export function signUp(email, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: email, password: password })
+        body: JSON.stringify({ email: email, password: password }),
+        mode: 'cors',
+
     };
     return fetch(host + route, requestOptions)
 }
@@ -49,6 +58,8 @@ export function signIn(email, password) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: password }),
         credentials: 'include',
+        mode: 'cors',
+
     };
     return fetch(host + route, requestOptions)
 }
@@ -60,7 +71,7 @@ export function signOut() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Headers': '*'},
         credentials: 'include',
-        mode: 'no-cors',
+        mode: 'cors',
     };
     return fetch(host + route, requestOptions)
 }
