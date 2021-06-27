@@ -5,7 +5,7 @@ export function getProducts() {
         //headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'true' },
         mode: 'no-cors',
     };
-    return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
+    return fetch("https://uj-ebiznes-back.azurewebsites.net/products",requestOptions).then((response) => response.json())
 }
 
 export function buyProducts(arr){
