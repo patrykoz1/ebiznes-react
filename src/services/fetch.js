@@ -1,8 +1,8 @@
 
 export function getProducts() {
     const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'true' },
+        //method: 'GET',
+        //headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'true' },
         mode: 'no-cors',
     };
     return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
