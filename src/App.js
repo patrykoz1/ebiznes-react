@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {BrowserRouter,Link,Route,Router} from 'react-router-dom';
+import {BrowserRouter,Link,Route,Router,Switch} from 'react-router-dom';
 import Products from "./components/Products";
 import Welcome from "./Welcome";
 import Logout from "./components/Logout";
@@ -64,13 +64,13 @@ function App() {
                   </ul>
               </div>
           </nav>
-
-        <Route path="/"><Welcome /></Route>
-        <Route path="/products"><Products addToBasket={addToBasket} /></Route>
-        <Route path="/register" component={Register}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/logout" component={Logout}/>
-
+        <Switch>
+        <Route exact path="/"><Welcome /></Route>
+        <Route exact path="/products"><Products addToBasket={addToBasket} /></Route>
+        <Route exact path="/register" component={Register}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/logout" component={Logout}/>
+        </Switch>
         {state.isLogged &&
 
         <div className="Basket">
