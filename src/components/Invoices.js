@@ -25,7 +25,7 @@ class Invoices extends Component{
     }
 
     async getInvoices(){
-        const url = "http://localhost:9000/";
+        const url = "https://uj-ebiznes-back.azurewebsites.net/";
         let response = await this.getInvoicesRequest(url)
         let invoices = [];
         response.map(inv => {
