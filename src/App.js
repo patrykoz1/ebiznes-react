@@ -26,8 +26,8 @@ function App() {
         setBasket([...basket, prod]);
         //setBasket(basket.push(prod))
     };
-    console.log("Cały basket");
-    console.log(basket);
+    //console.log("Cały basket");
+    //console.log(basket);
 
     return (
         <BrowserRouter >
@@ -39,25 +39,25 @@ function App() {
               <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav">
                       <li className="nav-item">
-                          <Link className="nav-link" to="/">Home <span className="sr-only"></span></Link>
+                          <Link className="nav-link" to="/">Home </Link>
                       </li>
                       <li className="nav-item">
-                          <Link className="nav-link" to="/products">Produkty <span className="sr-only"></span></Link>
+                          <Link className="nav-link" to="/products">Produkty </Link>
                       </li>
                       {!state.isLogged &&
                       <li className="nav-item">
-                          <Link className="nav-link" to="/register">Rejestruj sie <span className="sr-only"></span></Link>
+                          <Link className="nav-link" to="/register">Rejestruj sie </Link>
                       </li>
                       }
                       {!state.isLogged &&
                       <li className="nav-item">
-                          <Link className="nav-link" to="/login">Loguj sie <span className="sr-only"></span></Link>
+                          <Link className="nav-link" to="/login">Loguj sie </Link>
                       </li>
                       }
                       {state.isLogged &&
                       <li className="nav-item">
 
-                      <Link className="nav-link" to="/logout">Wyloguj sie <span className="sr-only"></span></Link>
+                      <Link className="nav-link" to="/logout">Wyloguj sie </Link>
                       </li>
                       }
 

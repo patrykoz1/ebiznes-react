@@ -15,7 +15,7 @@ class Comments extends Component{
             headers:{
                 'Accept':'application/json',
                 'Content-type': 'application/json',
-                'Access-Control-Allow-Origin':'http://localhost:3000',
+                'Access-Control-Allow-Origin':'hhttps://uj-ebiznes-back.azurewebsites.net',
             },
             method:'GET',
         }).then(response=>{return response.json}).then(responseData=>{
@@ -25,7 +25,7 @@ class Comments extends Component{
     }
 
     async getComments(){
-        const url = "http://localhost:9000/";
+        const url = "https://uj-ebiznes-back.azurewebsites.net/";
         let response = await this.getCommentsRequest(url)
         let comments = [];
         response.map(inv => {
