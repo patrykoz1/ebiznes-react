@@ -3,7 +3,7 @@ import React from 'react'
 export default function GoogleSignIn() {
 
     const responseGoogle = () => {
-        window.location.href = "https://uj-ebiznes-front.azurewebsites.net";
+        window.location.href = "https://uj-ebiznes-back.azurewebsites.net/provider/google";
     }
 
     return (
