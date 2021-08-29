@@ -5,7 +5,7 @@ export function getProducts() {
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'http://localhost:9000' },
         mode: 'no-cors',
     };
-    return fetch("http://localhost:9000/products").then((response) => response.json())
+    return fetch("https://uj-ebiznes-back.azurewebsites.net/products").then((response) => response.json())
 }
 
 export async function getUserById(id) {
@@ -14,7 +14,7 @@ export async function getUserById(id) {
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'http://localhost:9000' },
         mode: 'no-cors',
     };
-    return await fetch("http://localhost:9000/user/"+id).then((response) => response.json());
+    return await fetch("https://uj-ebiznes-back.azurewebsites.net/"+id).then((response) => response.json());
 }
 
 export function buyProducts(arr){
