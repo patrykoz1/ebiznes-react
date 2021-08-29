@@ -5,7 +5,7 @@ import React from 'react'
 export default function FacebookSignIn() {
 
     const responseFacebook = () => {
-        window.location.href = "https://uj-ebiznes-back.azurewebsites.net/authenticate/facebook";
+        window.location.href = "http://localhost:9000/authenticate/facebook";
     }
 
     return (
