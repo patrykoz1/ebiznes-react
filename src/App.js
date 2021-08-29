@@ -12,12 +12,14 @@ import Register from "./components/Register";
 
 
 import {MyContext} from "./contexts/AppContext";
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Basket from "./components/Basket";
+import {getUserById} from "./services/fetch";
 
 
 function App() {
     const [state, setState] = useContext(MyContext);
+    const [loading,setLoading] = useState(true);
     //console.log("state");
     const [basket, setBasket] = useState([]);
     //console.log(state.isLogged);
@@ -28,6 +30,59 @@ function App() {
     };
     //console.log("Cały basket");
     //console.log(basket);
+
+    const readUrlParamsFromAuthentication = () => {
+        var url_string = window.location.href; //window.location.href
+        var url = new URL(url_string);
+        var userStr = url.searchParams.get("user-id");
+        console.log(userStr);
+        var userId = null;
+        var userEmail = null;
+        //if (userStr && userStr.startsWith("User(")) {
+        if (userStr) {
+            /*var ind1 = userStr.lastIndexOf("User(") + 5;
+            var ind2 = userStr.indexOf(",");
+            userId = userStr.substring(ind1, ind2);
+
+            ind1 = userStr.lastIndexOf("),") + 2;
+            ind2 = userStr.lastIndexOf(")");*/
+
+            //userEmail = userStr.substring(ind1, ind2);
+
+            getUserById(userStr).then(user=>
+                {
+                    //localStorage.setItem("email", user.email);
+                    //localStorage.setItem("isLoggedIn", true);
+                    //localStorage.setItem("userId", user.id);
+                    //setState({ email: user.email, isLoggedIn: true, userId: user.id })
+                    localStorage.setItem('email', user.email);
+                    setState({ email: user.email, isLogged: true });
+                    console.log("TUTAAAAJ");
+                    console.log(user.email,user.id,state.isLoggedIn);
+                    setLoading(false);
+                }
+            );
+            console.log("UserStr");
+
+            /*localStorage.setItem("email", userEmail);
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("userId", userId);
+            setState({ email: userEmail, isLoggedIn: true, userId: userId })*/
+
+            //window.location.href="http://localhost:3000/";
+        }
+
+        //console.log(" user id =", userId, "email =", userEmail);
+    }
+
+    useEffect(() => {
+        readUrlParamsFromAuthentication();
+    }, [])
+
+    /*if(loading)
+    {
+        return(<h1>Ladowanie</h1>);
+    }*/
 
     return (
         <BrowserRouter >
@@ -66,7 +121,7 @@ function App() {
           </nav>
         <Switch>
         <Route exact path="/"><Welcome /></Route>
-        <Route exact path="/products"><Products addToBasket={addToBasket} /></Route>
+        <Route exact path="/products" component={Products}><Products addToBasket={addToBasket} /></Route>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/logout" component={Logout}/>
