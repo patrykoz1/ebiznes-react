@@ -84,7 +84,7 @@ export function signOut() {
 
 //G_AUTHUSER_H
 export function signInGoogle() {
-    const host = https://uj-ebiznes-back.azurewebsites.net/"
+    const host = "https://uj-ebiznes-back.azurewebsites.net/"
     const route = "authenticate/google";
     const requestOptions = {
         method: 'GET',
