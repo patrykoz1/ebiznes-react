@@ -14,7 +14,7 @@ export async function getUserById(id) {
         headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin':'https://uj-ebiznes-back.azurewebsites.net/' },
         mode: 'no-cors',
     };
-    return await fetch("https://uj-ebiznes-back.azurewebsites.net/"+id).then((response) => response.json());
+    return await fetch("https://uj-ebiznes-back.azurewebsites.net/user/"+id).then((response) => response.json());
 }
 
 export function buyProducts(arr){
